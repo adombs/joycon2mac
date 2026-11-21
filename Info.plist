@@ -23,5 +23,9 @@
     <!-- Accessibility permission -->
     <key>NSAccessibilityUsageDescription</key>
     <string>This app needs accessibility access to control the mouse and keyboard.</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app connects to your Joy-Con 2 controllers over Bluetooth.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>This app connects to your Joy-Con 2 controllers over Bluetooth.</string>
 </dict>
 </plist>
