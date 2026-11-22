@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import messagebox
 from pynput.mouse import Controller as MouseController
 from pynput.keyboard import Controller as KeyboardController
-from pynput.keyboard import Key
+from pynput.keyboard import Key, KeyCode
 import platform
 
 # Constants
@@ -69,7 +69,20 @@ def send_mouse_move(dx: int, dy: int) -> None:
         pass
 
 
+# macOS virtual keycodes for the main-row digits (kVK_ANSI_0..9). Sending the
+# bare character lets pynput resolve it to the numpad key on some layouts.
+_DIGIT_VK = {"0": 0x1D, "1": 0x12, "2": 0x13, "3": 0x14, "4": 0x15,
+             "5": 0x17, "6": 0x16, "7": 0x1A, "8": 0x1C, "9": 0x19}
+
+
+def _resolve_key(k: object) -> object:
+    if platform.system() == "Darwin" and isinstance(k, str) and k in _DIGIT_VK:
+        return KeyCode.from_vk(_DIGIT_VK[k])
+    return k
+
+
 def send_key_press(k: object) -> None:
+    k = _resolve_key(k)
     try:
         keyboard_controller.press(k)
     except Exception:
@@ -77,6 +90,7 @@ def send_key_press(k: object) -> None:
 
 
 def send_key_release(k: object) -> None:
+    k = _resolve_key(k)
     try:
         keyboard_controller.release(k)
     except Exception:

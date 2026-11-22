@@ -68,6 +68,7 @@ class JoyCon:
                 "SR": "4",
                 "MINUS": "5",
                 "SHARE": "z",
+                "STICK": "q",
             }
             # Single-mode override for D-Pad mapping
             if single_mode and single_which == "left":
@@ -93,6 +94,7 @@ class JoyCon:
                 "PLUS": "6",
                 "HOME": "n",
                 "CHAT": "m",
+                "STICK": "e",
             }
             # Single-mode override for face buttons: IJKL = Y B A X
             if single_mode and single_which == "right":
